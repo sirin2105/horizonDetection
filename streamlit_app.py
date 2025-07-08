@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 # ================================
 # MODEL CONFIGURATION - SPECIFY PATH HERE
 # ================================
-SEGMENTATION_MODEL_PATH = "best_sea_segmentation_model_resnet50.pth"  # Change this to your actual model path
+SEGMENTATION_MODEL_PATH = "best.pt"  # Change this to your actual model path
 
 # Set page config
 st.set_page_config(
