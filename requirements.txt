@@ -1,5 +1,11 @@
 streamlit
 torch
 torchvision
+opencv-python
 numpy
-pillow
+Pillow
+albumentations
+segmentation-models-pytorch
+scikit-image
+ultralytics
+scikit-learn
