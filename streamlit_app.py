@@ -459,7 +459,7 @@ def main():
     tile_grid_y = st.sidebar.slider("Tile Grid Y", 2, 16, 8, 1)
     
     # Clear cache button
-    if st.sidebar.button("🗑 Clear Cache"):
+    if st.sidebar.button("🗑️ Clear Cache"):
         st.cache_resource.clear()
         # Also clear GPU memory
         if torch.cuda.is_available():
@@ -641,19 +641,19 @@ def main():
                     #         det_col1, det_col2, det_col3, det_col4 = st.columns(4)
                             
                     #         with det_col1:
-                    #             st.write(f"*Boat {i+1}*")
+                    #             st.write(f"**Boat {i+1}**")
                     #             st.write(f"Confidence: {conf:.3f}")
                             
                     #         with det_col2:
-                    #             st.write(f"*Position*")
+                    #             st.write(f"**Position**")
                     #             st.write(f"Center: ({center_x}, {center_y})")
                             
                     #         with det_col3:
-                    #             st.write(f"*Size*")
+                    #             st.write(f"**Size**")
                     #             st.write(f"{width}×{height} pixels")
                             
                     #         with det_col4:
-                    #             st.write(f"*Location*")
+                    #             st.write(f"**Location**")
                     #             st.write(f"In Sea: {in_sea}")
             
             # Clear progress indicators
@@ -663,24 +663,24 @@ def main():
             st.success("Processing completed for all images!")
     
     # Information section
-    with st.expander("ℹ About This System"):
+    with st.expander("ℹ️ About This System"):
         st.markdown(f"""
         ### Combined Sea Segmentation & YOLO Boat Detection System
         
         This system combines semantic segmentation and object detection to provide comprehensive maritime scene analysis.
         
-        *Model Configuration:*
-        - Segmentation model path: {SEGMENTATION_MODEL_PATH}
+        **Model Configuration:**
+        - Segmentation model path: `{SEGMENTATION_MODEL_PATH}`
         - Model is automatically loaded and cached on startup
         - No need to upload or specify model path in UI
         
-        *Processing Pipeline:*
-        1. *Image Preprocessing*: CLAHE enhancement, Scharr-Y edge detection, Local Binary Pattern
-        2. *Sea Segmentation*: Binary classification of sea vs no-sea areas using DeepLabV3+
-        3. *Boat Detection*: YOLO-based detection of boat objects
-        4. *Combined Analysis*: Overlay results to show boats in context of sea areas
+        **Processing Pipeline:**
+        1. **Image Preprocessing**: CLAHE enhancement, Scharr-Y edge detection, Local Binary Pattern
+        2. **Sea Segmentation**: Binary classification of sea vs no-sea areas using DeepLabV3+
+        3. **Boat Detection**: YOLO-based detection of boat objects
+        4. **Combined Analysis**: Overlay results to show boats in context of sea areas
         
-        *Key Features:*
+        **Key Features:**
         - Binary sea segmentation (sea vs no-sea)
         - YOLO-based boat detection
         - Combined visualization with overlays
@@ -689,18 +689,18 @@ def main():
         - Support for multiple image formats
         - Persistent model loading (no re-loading on each run)
         
-        *Model Requirements:*
+        **Model Requirements:**
         - Segmentation model: DeepLabV3+ with ResNet50 backbone (binary classification, ~372 MB)
         - YOLO model: YOLOv8 or custom trained model
         
-        *Performance Optimizations:*
+        **Performance Optimizations:**
         - Cached model loading prevents re-loading
         - GPU memory optimization with half precision
         - Automatic memory cleanup after inference
         - Batch processing support
         
-        *Supported Formats:* PNG, JPG, JPEG, TIFF, TIF
+        **Supported Formats:** PNG, JPG, JPEG, TIFF, TIF
         """)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
