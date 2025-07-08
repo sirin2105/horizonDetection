@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 # ================================
 # MODEL CONFIGURATION - SPECIFY PATH HERE
 # ================================
-SEGMENTATION_MODEL_PATH = "best.pt"  # Change this to your actual model path
+SEGMENTATION_MODEL_PATH = "best_sea_segmentation_model_resnet50.pth"  # Change this to your actual model path
 
 # Set page config
 st.set_page_config(
@@ -81,13 +81,11 @@ def load_segmentation_model():
                 classes=1,  # Changed to 2 classes for binary segmentation (sea vs no-sea)
                 activation=None
             )
-            
-            checkpoint = torch.load(SEGMENTATION_MODEL_PATH, map_location=device, weights_only=False)
-            if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
-                model.load_state_dict(checkpoint['model_state_dict'])
-            else:
-                model.load_state_dict(checkpoint)
+            state_dict = torch.load(SEGMENTATION_MODEL_PATH, map_location=device)
+            model.load_state_dict(state_dict)  # ✅ Load directly
 
+            #checkpoint = torch.load(SEGMENTATION_MODEL_PATH, map_location=device)
+            #model.load_state_dict(checkpoint['model_state_dict'])  # load only model weights
 
             
             # Clear checkpoint from memory
