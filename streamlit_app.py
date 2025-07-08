@@ -1,4 +1,7 @@
 import os
+import torch.serialization
+from ultralytics.nn.tasks import DetectionModel
+
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 
 import streamlit as st
@@ -81,6 +84,9 @@ def load_segmentation_model():
                 classes=1,  # Changed to 2 classes for binary segmentation (sea vs no-sea)
                 activation=None
             )
+           
+            torch.serialization.add_safe_globals([DetectionModel])
+
             state_dict = torch.load(SEGMENTATION_MODEL_PATH, map_location=device)
             model.load_state_dict(state_dict)  # ✅ Load directly
 
