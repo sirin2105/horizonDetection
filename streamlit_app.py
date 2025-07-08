@@ -82,8 +82,12 @@ def load_segmentation_model():
                 activation=None
             )
             
-            checkpoint = torch.load(SEGMENTATION_MODEL_PATH, map_location=device)
-            model.load_state_dict(checkpoint['model_state_dict'])  # load only model weights
+            checkpoint = torch.load(SEGMENTATION_MODEL_PATH, map_location=device, weights_only=False)
+            if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
+                model.load_state_dict(checkpoint['model_state_dict'])
+            else:
+                model.load_state_dict(checkpoint)
+
 
             
             # Clear checkpoint from memory
